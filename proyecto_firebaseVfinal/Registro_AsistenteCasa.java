@@ -4,11 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 
+/**
+ * * Interfaz gráfica para el registro y gestión de asistentes de casa inteligentes.
+ * Proporciona funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) para dispositivos domésticos inteligentes
+ * integrados con Firebase Firestore
+ * 
+ * @author Marvin Batres
+ */
+
+
+
 public class Registro_AsistenteCasa extends javax.swing.JFrame {
 
     /**
-     * Creates new form Registro_AsistenteCasa
-     */
+     * Constructor que inicializa la interfaz y carga los datos iniciales.
+     * Configura los combobox con tipos de dispositivos y valores booleanos.
+       */
+  
     public Registro_AsistenteCasa() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -19,6 +31,10 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Configura el combobox de tipos de dispositivos disponibles.
+     * Incluye opciones como asistentes vocales, sensores, cámaras, etc.
+     */
     private void configuraComboBox() {
         listTipoDispositivo.removeAllItems();
 
@@ -34,6 +50,12 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
         listTipoDispositivo.setSelectedIndex(0);
 
     }
+    
+    
+    /**
+     * Configura los combobox para campos booleanos (true/false).
+     * Aplica a campos como pantalla, conexión inalámbrica y hub.
+     */
 
     private void configuraComboBoxBooleano() {
         listPantalla.removeAllItems();
@@ -436,6 +458,15 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
     private javax.swing.JTextField txtTipoDispositivo;
     // End of variables declaration//GEN-END:variables
 
+    
+    
+     /**
+     * Valida los campos obligatorios del formulario que estén completos.
+     * Verifica que precio y stock sean valores numéricos válidos.
+     * @return true si todos los campos son válidos, false en caso contrario
+     */
+    
+    
     private boolean validarCampos() {
         if (txtID.getText().trim().isEmpty()
                 || txtNombre.getText().trim().isEmpty()
@@ -460,6 +491,12 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
         return true;
     }
 
+    
+    /**
+     * Crea un objeto AsistenteCasa a partir de los datos del formulario.
+     * @return Instancia de AsistenteCasa con los datos del formulario
+     */
+    
     private AsistenteCasa crearAsistente() {
             return new AsistenteCasa(
                     Integer.parseInt(txtID.getText().trim()),
@@ -487,6 +524,8 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
        
 
     }
+    
+    
 
     private Map<String, Object> crearMapeoDatosAsistCasa(AsistenteCasa asistentecasa) {
         Map<String, Object> datos = new HashMap();
@@ -508,6 +547,11 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
 
         return datos;
     }
+    
+    /**
+     * Guarda un objeto nuevo de asistente de casa en la base de datos.
+     * Realiza validación de campos antes del guardado.
+     */
 
     private void guardar() {
         if (!validarCampos()) {
@@ -533,6 +577,11 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
         }
 
     }
+    
+      /**
+     * Actualiza los datos de un asistente de casa existente.
+     * Utiliza el ID para identificar el registro a actualizar.
+     */
 
     private void actualizar() {
         if (!validarCampos()) {
@@ -556,6 +605,12 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
 
         }
     }
+    
+    
+    /**
+     * Limpia todos los campos del formulario.
+     * Restablece los valores por defecto en en los campos de texto y combobox.
+     */
 
     private void clearForm() {
         txtCompAsistente.setText("");
@@ -576,6 +631,11 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Busca un asistente de casa por su ID.
+     * Muestra los resultados en el formulario y tabla.
+     */
+    
     private void BusquedaID() {
 
         try {
@@ -642,6 +702,10 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Maneja el evento de clic en la tabla para cargar datos en el formulario.
+     * @param evt Evento del mouse.
+    */
     private void mostrarEnTabla(AsistenteCasa ia) {
         javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tbTablaAsistenteCasa.getModel();
         modelo.setRowCount(0);
@@ -669,6 +733,12 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
         modelo.addRow(fila);
 
     }
+    
+    /**
+     * Elimina un asistente de casa de la base de datos.
+     * Utiliza el ID del campo correspondiente.
+     */
+    
 
     private void eliminar() {
         String idDoc = txtID.getText();
@@ -687,5 +757,4 @@ public class Registro_AsistenteCasa extends javax.swing.JFrame {
         }
 
     }
-
 }

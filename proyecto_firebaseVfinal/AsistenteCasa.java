@@ -4,6 +4,8 @@ import com.mycompany.proyecto_firebase.Producto;
 
 public class AsistenteCasa extends Producto {
 
+    
+    
     private String tipoDispositivo;       
     private String protocoloComunicacion;  
     private String compatibilidadAsistente;
@@ -13,6 +15,24 @@ public class AsistenteCasa extends Producto {
     private String rangoConexion;          
     private boolean requiereHub;           
 
+    /**
+     * 
+     * @param Id: Número Identificacion del producto
+     * @param nombre: Nombre del producto
+     * @param precio: Precio o valor del producto
+     * @param stock: Cantidad de unidades de un producto 
+     * @param marca: Marca del producto
+     * @param modelo: Tipo de modelo del producto
+     * @param garantia: Garantia de años que puede tener un producto
+     * @param tipoDispositivo: Tipo dispotivo de asistente de Casa
+     * @param protocoloComunicacion: Protocolo que se puede comunicar 
+     * @param compatibilidadAsistente: Compatibilidad con otros productos de asistende de casa
+     * @param tienePantalla: Indica si tiene pantalla o no 
+     * @param entradasSalidas: Tipo de entradas y salidas de conexion 
+     * @param esInalambrico: Si el dispositivo es Inalambrico o no
+     * @param rangoConexion: El rango que el producto puede establecer conexión 
+     * @param requiereHub : Si requiere HUb o no.
+     */
    
     public AsistenteCasa(int Id, String nombre, Double precio, int stock, 
                         String marca, String modelo, double garantia,
@@ -20,8 +40,8 @@ public class AsistenteCasa extends Producto {
                         String compatibilidadAsistente, boolean tienePantalla, 
                         String entradasSalidas, boolean esInalambrico,
                         String rangoConexion, boolean requiereHub) {
+       
         
-    
         super(Id, nombre, precio, stock, marca, modelo, garantia);
         
         this.tipoDispositivo = tipoDispositivo;
@@ -35,7 +55,11 @@ public class AsistenteCasa extends Producto {
     }
 
     
-  
+  /**
+   * *  Metodos abstracto de herencias para las clases hijas
+     * calcularPercioIVa(): Calcula el Iva del producto
+     * getTipoCategoria(): Tipo de categoria que pertenece el producto
+   */
     @Override
     public double calcularPercioIVa() {
         double iva = 0.19;  // IVA del 19% para productos electrónicos
@@ -48,6 +72,11 @@ public class AsistenteCasa extends Producto {
         return "Dispositivo Casa Inteligente";
     }
 
+    /**
+     * Determina el uso princiapl del dispositivo
+     * determinarUsoPrincipal()
+     * @return 
+     */
    
     public String determinarUsoPrincipal() {
         switch(tipoDispositivo.toLowerCase()) {
@@ -105,7 +134,10 @@ public class AsistenteCasa extends Producto {
         }
     }
     
-    
+    /**
+     * Informacion completa 
+     * @return 
+     */
     public String getInfoCompleta() {
         return String.format(
             "%s %s - %s | Precio: $%.2f | Stock: %d | Tipo: %s",
@@ -188,7 +220,11 @@ public class AsistenteCasa extends Producto {
         this.requiereHub = requiereHub;
     }
 
-   
+   /**
+    * Metodo toString
+    * Devuelve el resultado de los valores en forma de cadena de caracteres.
+    * @return 
+    */
     @Override
     public String toString() {
         return String.format(

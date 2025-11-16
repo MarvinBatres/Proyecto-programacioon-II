@@ -1,19 +1,20 @@
-
 package com.mycompany.proyecto_firebase;
 
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 
-
 /**
+ * Interfaz gráfica para el registro y gestión de computadoras en Firebase.
+ * Proporciona funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) y
+ * utiliza el patrón Facade para simplificar operaciones complejas.
  *
  * @author Marvin Batres
  */
 public class Registro_computadora extends javax.swing.JFrame {
 
     /**
-     * Creates new form Registro_computadora
+     * Constructor que inicializa la interfaz y carga los datos iniciales.
      */
     public Registro_computadora() {
         initComponents();
@@ -465,7 +466,14 @@ public class Registro_computadora extends javax.swing.JFrame {
     private javax.swing.JTextField txtTipoComputadora;
     // End of variables declaration//GEN-END:variables
 
-     private boolean validarCampos() {
+    /**
+     * Valida que los campos obligatorios del formulario estén completos. Campos
+     * obligatorios: ID, Nombre, Precio, Stock, Tipo de Computadora.
+     *
+     * @return retorna un true si todos los campos son válidos, false en caso
+     * contrario
+     */
+    private boolean validarCampos() {
         if (txtID.getText().trim().isEmpty()
                 || txtNombre.getText().trim().isEmpty()
                 || txtPrecio.getText().trim().isEmpty()
@@ -488,16 +496,13 @@ public class Registro_computadora extends javax.swing.JFrame {
 
         return true;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    /**
+     * Crea un objeto Computadora a partir de los datos del formulario.
+     * Implementa el patrón Facade para simplificar la creación del objeto.
+     *
+     * @return retorna Computadora con los datos del formulario
+     */
     //Patron FACADE
     private Computadora crearCamposComputadora() {
 
@@ -538,8 +543,12 @@ public class Registro_computadora extends javax.swing.JFrame {
         return datos;
     }
 
+    /**
+     * Guarda una nueva computadora en la base de datos Firebase. Valida campos,
+     * crea el objeto y ejecuta las interfaces implementadas.
+     */
     private void guardar() {
-          if (!validarCampos()) {
+        if (!validarCampos()) {
             return;
         }
         Computadora compu = crearCamposComputadora();
@@ -563,8 +572,12 @@ public class Registro_computadora extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Elimina una computadora de la base de datos Firebase. Utiliza el ID del
+     * campo correspondiente para la eliminación.
+     */
     private void actualizar() {
-          if (!validarCampos()) {
+        if (!validarCampos()) {
             return;
         }
         Computadora compu = crearCamposComputadora();
@@ -587,6 +600,10 @@ public class Registro_computadora extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Elimina una computadora de la base de datos Firebase. Utiliza el ID del
+     * campo correspondiente para la eliminación.
+     */
     private void eliminar() {
         String idDoc = txtID.getText();
 
@@ -607,6 +624,9 @@ public class Registro_computadora extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Limpia todos los campos del formulario y recarga la tabla.
+     */
     private void clearForm() {
         txtProcesador.setText("");
         txtTamGb.setText("");
@@ -624,6 +644,12 @@ public class Registro_computadora extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Ejecuta y muestra los resultados de las interfaces implementadas:
+     * Conectable y GarantiaExtendida.
+     *
+     * @param compu Computadora para probar las interfaces
+     */
     private void MostrarInterfaces(Computadora compu) {
 
         System.out.println("*** Conectable ***");
@@ -666,7 +692,7 @@ public class Registro_computadora extends javax.swing.JFrame {
                 llenarCamposConComputadora(compuBuscada);
                 JOptionPane.showMessageDialog(null, "Computadora encontrada con Id: " + idBusqueda);
                 mostrarEnTabla(compuBuscada);
-                
+
             } else {
                 JOptionPane.showMessageDialog(null, "Computadora No encontrada ");
                 clearForm();
@@ -674,7 +700,7 @@ public class Registro_computadora extends javax.swing.JFrame {
 
         } catch (Exception e) {
             System.err.println("Error al buscar computadora: " + e.getMessage());
-            
+
         }
 
     }
@@ -685,7 +711,7 @@ public class Registro_computadora extends javax.swing.JFrame {
         txtTarjG.setText(compu.getTarjGrafica());
         txtTipoComputadora.setText(compu.getTipoComputadora());
         txtConexion.setText(compu.getEstConexion());
-        txtID.setText(String.valueOf(compu.getId())); 
+        txtID.setText(String.valueOf(compu.getId()));
         txtNombre.setText(compu.getNombre());
         txtPrecio.setText(String.valueOf(compu.getPrecio()));
         txtStock.setText(String.valueOf(compu.getStock()));
@@ -694,32 +720,30 @@ public class Registro_computadora extends javax.swing.JFrame {
         txtDescuento.setText(String.valueOf(compu.getGarantia()));
     }
 
-    
     private void mostrarEnTabla(Computadora compu) {
-    // Obtener el modelo de la tabla
-    javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tbTabla.getModel();
-    
-    // Limpiar la tabla
-    modelo.setRowCount(0);
-    
-    // Agregar la fila con los datos de la computadora
-    Object[] fila = {
-        compu.getProcesador(),
-        compu.getAlmacenamientoGB(),
-        compu.getTarjGrafica(),
-        compu.getTipoComputadora(),
-        compu.getEstConexion(),
-        compu.getId(),
-        compu.getNombre(),
-        compu.getPrecio(),
-        compu.getStock(),
-        compu.getMarca(),
-        compu.getModelo(),
-        compu.getGarantia()
-    };
-    
-    modelo.addRow(fila);
-}
-    
-    
+        // Obtener el modelo de la tabla
+        javax.swing.table.DefaultTableModel modelo = (javax.swing.table.DefaultTableModel) tbTabla.getModel();
+
+        // Limpiar la tabla
+        modelo.setRowCount(0);
+
+        // Agregar la fila con los datos de la computadora
+        Object[] fila = {
+            compu.getProcesador(),
+            compu.getAlmacenamientoGB(),
+            compu.getTarjGrafica(),
+            compu.getTipoComputadora(),
+            compu.getEstConexion(),
+            compu.getId(),
+            compu.getNombre(),
+            compu.getPrecio(),
+            compu.getStock(),
+            compu.getMarca(),
+            compu.getModelo(),
+            compu.getGarantia()
+        };
+
+        modelo.addRow(fila);
+    }
+
 }

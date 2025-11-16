@@ -5,6 +5,10 @@ package com.mycompany.proyecto_firebase;
 import com.mycompany.proyecto_firebase.Producto;
 
 
+/**
+ * La clase representa una herramienta electrónica como producto especializado.
+ * Extendido de la clase Producto con atributos específicos de herramientas electrónicas.
+ */
 public class HerramientaElectronica extends Producto {
     private String tipoHerramienta;        
     private String tipoFuenteEnergia;     
@@ -14,6 +18,26 @@ public class HerramientaElectronica extends Producto {
     private String material;               
     private String aplicacion;             
     private int cantidadPiezas;            
+
+    /**
+     * Constructor para crear una herramienta electrónica.
+     * 
+     * @param Id ID del producto
+     * @param nombre Nombre de la herramienta
+     * @param precio Precio base
+     * @param stock Cantidad disponible
+     * @param marca Marca fabricante
+     * @param modelo Modelo específico
+     * @param garantia Años de garantía
+     * @param tipoHerramienta Tipo de herramienta
+     * @param tipoFuenteEnergia Fuente de energía
+     * @param voltaje Voltaje de operación
+     * @param fuenteDeBateria Si usa batería
+     * @param incluyeEstuche Si incluye estuche
+     * @param material Material de construcción
+     * @param aplicacion Aplicación principal
+     * @param cantidadPiezas Número de piezas incluidas
+     */
 
     
     public HerramientaElectronica(int Id, String nombre, Double precio, int stock, 
@@ -36,16 +60,33 @@ public class HerramientaElectronica extends Producto {
     }
 
    
+    /**
+     * Calcula el precio con IVA del 19%.
+     * @return Precio con IVA incluido
+     */
+    
     @Override
     public double calcularPercioIVa() {
         double iva = 0.19;  // IVA del 19% para herramientas
         return this.getPrecio() * (1 + iva);
     }
     
+    /**
+     * Obtiene el tipo de categoría del producto.
+     * @return "Herramienta Electrónica"
+     */
+    
     @Override
     public String getTipoCategoria() {
         return "Herramienta Electrónica";
     }
+    
+    
+    /**
+     * Determina el nivel profesional según el tipo de herramienta.
+     * 
+     * @return Nivel de profesionalidad requerido
+     */
 
     public String getNivelProfesional() {
         switch(tipoHerramienta.toLowerCase()) {
@@ -65,66 +106,10 @@ public class HerramientaElectronica extends Producto {
         }
     }
     
-    
-    public boolean esDePrecision() {
-        String[] herramientasPrecision = {
-            "desarmador de precisión", "pinza", "tweezers", 
-            "sonda", "microscopio", "lupa"
-        };
-        
-        for (String herramienta : herramientasPrecision) {
-            if (tipoHerramienta.toLowerCase().contains(herramienta)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    
-    public String getRecomendacionesSeguridad() {
-        StringBuilder seguridad = new StringBuilder();
-        
-        if (voltaje > 50) {
-            seguridad.append("• Usar guantes aislantes • ");
-        }
-        if (tipoHerramienta.toLowerCase().contains("soldador")) {
-            seguridad.append("• Usar careta y guantes • ");
-        }
-        if (esDePrecision()) {
-            seguridad.append("• Manipular con cuidado • ");
-        }
-        if (tipoFuenteEnergia.equals("Eléctrica")) {
-            seguridad.append("• Verificar conexión a tierra • ");
-        }
-        
-        return seguridad.length() > 0 ? seguridad.toString() : "Uso general seguro";
-    }
-    
-   
-    public String getMantenimientoRequerido() {
-        if (tipoHerramienta.toLowerCase().contains("soldador")) {
-            return "Mensual - Limpieza de puntas";
-        } else if (tipoFuenteEnergia.equals("Batería")) {
-            return "Trimestral - Recarga/Cambio de baterías";
-        } else if (esDePrecision()) {
-            return "Semestral - Calibración y limpieza";
-        } else {
-            return "Anual - Revisión general";
-        }
-    }
-    
-    public double calcularPrecioPorPieza() {
-        if (cantidadPiezas > 0) {
-            return this.getPrecio() / cantidadPiezas;
-        }
-        return this.getPrecio();
-    }
-    
-    public boolean esParaPrincipiantes() {
-        return !esDePrecision() && 
-               !tipoHerramienta.toLowerCase().contains("soldador") &&
-               voltaje <= 24;
-    }
+      /**
+     * Obtiene información resumida de la herramienta.
+     * @return String con información básica formateada
+     */
 
     public String getInfoCompletaHerramienta() {
         return String.format(
@@ -138,11 +123,8 @@ public class HerramientaElectronica extends Producto {
         );
     }
     
-    public boolean estaDisponibleParaVenta() {
-        return this.getStock() > 0 && 
-               this.getPrecio() > 0 && 
-               this.getGarantia() >= 0.5; // Mínimo 6 meses de garantía
-    }
+   
+    // GETTERS Y SETTERS
 
     public String getTipoHerramienta() {
         return tipoHerramienta;
@@ -208,6 +190,11 @@ public class HerramientaElectronica extends Producto {
         this.cantidadPiezas = cantidadPiezas;
     }
 
+    /**
+     * Representación en String de la herramienta electrónica. 
+     * @return String con todos los detalles formateados
+     *
+    */
     @Override
     public String toString() {
         return String.format(
@@ -222,10 +209,7 @@ public class HerramientaElectronica extends Producto {
             tipoHerramienta, aplicacion, material,
             tipoFuenteEnergia, voltaje, fuenteDeBateria ? "Sí" : "No", 
             incluyeEstuche ? "Sí" : "No",
-            cantidadPiezas, getNivelProfesional(), esDePrecision() ? "Alta" : "Estándar",
-            getPrecio(), calcularPercioIVa(), getStock(), getGarantia(),
-            getMantenimientoRequerido(), esParaPrincipiantes() ? "Sí" : "No",
-            getRecomendacionesSeguridad()
+            cantidadPiezas, getNivelProfesional()
         );
     }
 }

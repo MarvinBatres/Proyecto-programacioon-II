@@ -8,14 +8,25 @@ import com.google.firebase.cloud.FirestoreClient;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-
-//Patron Singleton
+/**
+ * Maneja la conexión a Firebase Firestore usando el patrón Singleton.
+ * Es encargada de inicializar la aplicación Firebase y proporcionar acceso a Firestore.  
+ * 
+ */
 public class Conexion_Base {
+
     
     private static boolean conectado = false;
     public static Firestore db;
 
+    /**
+     *conectado: Indica si ya se estableció conexión con Firebase
+     *db: Instancia de Firestore para operaciones con la base de datos
+
+     */
+   
+    
+    
     public static void conectarFirebase() {
         
         if(conectado){
@@ -43,6 +54,14 @@ public class Conexion_Base {
         }
 
     }
+     /**
+     * Obtiene la instancia de Firestore.
+     * Si no está conectado, establece la conexión primero.
+     * 
+     * @return Instancia de Firestore para operaciones con la base de datos
+     */
+    
+    
     public static Firestore getDb(){
         if(!conectado){
             conectarFirebase();

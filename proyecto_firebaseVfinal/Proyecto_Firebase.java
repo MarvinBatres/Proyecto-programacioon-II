@@ -2,14 +2,29 @@ package com.mycompany.proyecto_firebase;
 
 import javax.swing.*;
 
-public class Proyecto_Firebase {
+/**
+ * Clase principal que inicia la aplicación Firebase.
+ * Contiene el método main y la lógica de inicialización de la interfaz gráfica.
+ */
 
+
+public class Proyecto_Firebase {
+    
+/**
+     * Punto de entrada principal de la aplicación.
+     * Inicia la ventana principal mediante invocación thread-safe.
+     * @param args Argumentos de línea de comandos (no utilizados)
+     */
     public static void main(String[] args) {
 
       LlamarVentana();
 
     }
 
+    /**
+     * Inicializa y muestra la ventana principal del menú.
+     * Usa SwingUtilities.invokeLater para invocar una ventana emergente y garantizar la seguridad.
+     */
     public static void LlamarVentana() {
 
         SwingUtilities.invokeLater(new Runnable() {

@@ -14,11 +14,31 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Clase para operaciones CRUD de asistentes de casa en Firebase Firestore.
+ * Proporciona métodos para guardar, actualizar, eliminar, buscar y cargar en tabla.
+ * 
+ */
+
+
+
 public class Crud_AsistenteCasa {
 
     CollectionReference reference;
     static Firestore db;
 
+    
+    
+    /**
+     * Guarda un nuevo asistente de casa en Firestore.
+     *
+     * @param coleccion  Nombre de la colección Firestore
+     * @param documento  ID o identificador del documento
+     * @param dat_Asist  mapa con los datos del asistente
+     * @return true si se guardó correctamente, false en caso de error
+     */
+    
+    
     public static boolean guardarAsistenteCasa(String coleccion, String documento, Map<String, Object> dat_Asist) {
         Firestore db = Conexion_Base.getDb();
         try {
@@ -32,6 +52,16 @@ public class Crud_AsistenteCasa {
         return false;
     }
 
+    
+    
+      /**
+     * Actualiza un asistente de casa existente en Firestore.
+     *
+     * @param coleccion  Nombre de la colección Firestore
+     * @param documento  ID del documento a actualizar
+     * @param dat_Asist  mapa con los campos a actualizar
+     * @return retorno un true si se actualizó correctamente, false en caso de error
+     */
     public static boolean actualizarAsistenteCasa(String coleccion, String documento, Map<String, Object> dat_Asist) {
         Firestore db = Conexion_Base.getDb();
         try {
@@ -45,6 +75,15 @@ public class Crud_AsistenteCasa {
         return false;
     }
 
+    
+    
+    
+     /**
+     * Elimina un asistente de casa de Firestore.
+     * @param coleccion  Nombre de la colección Firestore
+     * @param documento  ID del documento a eliminar
+     * @return retorna un true si se eliminó correctamente, false en caso de error
+     */
     public static boolean eliminarAsistenteCasa(String coleccion, String documento) {
         Firestore db = Conexion_Base.getDb();
         try {
@@ -57,6 +96,12 @@ public class Crud_AsistenteCasa {
         }
         return false;
     }
+    
+    
+    /**
+     * Carga todos los asistentes de casa en una JTable.
+     * @param table  JTable donde se mostrarán los datos
+     */
 
     public static void cargarTablaAsistenteCasa(JTable table) {
         DefaultTableModel model = new DefaultTableModel();
@@ -110,6 +155,12 @@ public class Crud_AsistenteCasa {
         table.setModel(model);
     }
 
+      /**
+     * Busca un asistente de casa por su ID.
+     * @param Id  ID del asistente a buscar
+     * @return objeto AsistenteCasa si se encuentra, null si no existe o hay error
+     */
+    
     public static AsistenteCasa buscarAsistenteCasa(String Id) {
         //
         try {

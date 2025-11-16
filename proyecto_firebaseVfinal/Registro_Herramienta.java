@@ -3,12 +3,18 @@ package com.mycompany.proyecto_firebase;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+/*
+ * Interfaz gráfica para el registro y gestión de herramientas electrónicas
+ * Proporciona funcionalidades CRUD (Crear, Leer, Actualizar, Eliminar) 
+ * para herramientas electrónicas con integración a base de datos Firebase
+ *
+*/
 
 public class Registro_Herramienta extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Registro_Herramienta
-     */
+    /**    
+     * Constructor principal que inicializa la interfaz y configura componentes
+    */
     public Registro_Herramienta() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -19,6 +25,10 @@ public class Registro_Herramienta extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Configura los valores de los ComboBoxs para tipos de herramientas disponibles
+     */    
+   
     private void configurarComboBox() {
 
         jComboBox1.removeAllItems();
@@ -35,6 +45,10 @@ public class Registro_Herramienta extends javax.swing.JFrame {
         jComboBox1.setSelectedIndex(0);
 
     }
+    
+    /**
+     * Configura los ComboBox para campos booleanos (true/false)
+     */
 
     private void configurarComboBoxBooleano() { //--------------------Metodo implemetado
         ListBotonFuenteBateria.removeAllItems();
@@ -471,6 +485,10 @@ public class Registro_Herramienta extends javax.swing.JFrame {
     private javax.swing.JTextField txtVoltaje;
     // End of variables declaration//GEN-END:variables
 
+     /**
+     * Valida que los campos obligatorios del formulario estén completos
+     * @return true si todos los campos obligatorios son válidos, false en caso contrario
+     */
     private boolean validarCampos() {
         if (txtIngreso.getText().trim().isEmpty()
                 || txtNOmbre.getText().trim().isEmpty()
@@ -494,7 +512,12 @@ public class Registro_Herramienta extends javax.swing.JFrame {
 
         return true;
     }
-
+    
+    /**
+     * Crea un objeto HerramientaElectronica a partir de los datos del formulario
+     * @return retorna un Objeto HerramientaElectronica con los datos del formulario
+     */
+    
     private HerramientaElectronica crearCamposherramienta() {
 
         try {
@@ -549,7 +572,12 @@ public class Registro_Herramienta extends javax.swing.JFrame {
 
         return datos;
     }
-
+    
+    /**
+     * Guarda un objeto de una nueva herramienta electrónica en la base de datos
+     * Realiza validación de campos antes del guardado
+     */
+    
     private void guardar() {
 
         if (!validarCampos()) {
@@ -577,6 +605,10 @@ public class Registro_Herramienta extends javax.swing.JFrame {
         }
 
     }
+    
+    /**
+     * Actualiza los datos de una herramienta electrónica existente
+     */
 
     private void actualizar() {
         if (!validarCampos()) {
@@ -600,6 +632,9 @@ public class Registro_Herramienta extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Elimina una herramienta electrónica de la base de datos
+     */
     private void eliminar() {
         String idDoc = txtIngreso.getText();
 
@@ -617,6 +652,10 @@ public class Registro_Herramienta extends javax.swing.JFrame {
         }
 
     }
+    
+    /**
+     * Limpia todos los campos del formulario
+     */
 
     private void clearForm() {
 
@@ -641,6 +680,11 @@ public class Registro_Herramienta extends javax.swing.JFrame {
         txtCanpiezas.setText("");
 
     }
+     /**
+     * Busca una herramienta electrónica por su ID
+     * Muestra los resultados en el formulario y tabla
+     */
+    
 
     private void busquedaID() {
         try {
@@ -666,6 +710,12 @@ public class Registro_Herramienta extends javax.swing.JFrame {
         }
     }
 
+    
+    /**
+     * Llena los campos del formulario con los datos de una herramienta
+     * @param herramienta Objeto HerramientaElectronica con los datos a mostrar
+     */
+    
     private void llenarCamposHerramienta(HerramientaElectronica herramienta) {
 
         txtIngreso.setText(String.valueOf(herramienta.getId()));

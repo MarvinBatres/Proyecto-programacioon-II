@@ -1,6 +1,10 @@
 
 package com.mycompany.proyecto_firebase;
 
+/**
+ * Clase que representa un teléfono inteligente como producto.
+ * Extiende de la clase Producto y añade características específicas de smartphones.
+ */
 
 public class Telefono extends Producto {
     private int almacenamientoGB;      
@@ -8,6 +12,22 @@ public class Telefono extends Producto {
     private String soOperativo;       
     private String tamanio;           
 
+    /**
+     *  * Constructor para crear un objeto Telefono.
+     * @param Id ID único del teléfono
+     * @param nombre Nombre del teléfono
+     * @param precio Precio base del teléfono
+     * @param stock Cantidad disponible en inventario
+     * @param marca Marca del teléfono
+     * @param modelo Modelo específico del teléfono
+     * @param garantia Años de garantía del producto
+     * @param almacenamientoGB Capacidad de almacenamiento en GB
+     * @param capacidadRam Memoria RAM en GB
+     * @param soOperativo Sistema operativo del teléfono
+     * @param tamanio Tamaño de la pantalla
+     
+     * 
+     */
 
     public Telefono(int Id, String nombre, Double precio, int stock, 
                    String marca, String modelo, double garantia,
@@ -22,6 +42,10 @@ public class Telefono extends Producto {
         this.tamanio = tamanio;
     }
 
+      /**
+     * Calcula el precio del teléfono incluyendo el IVA del 19%.
+     * @return Precio con IVA incluido
+     */
     
     @Override
     public double calcularPercioIVa() {
@@ -29,6 +53,10 @@ public class Telefono extends Producto {
         return this.getPrecio() * (1 + iva);
     }
     
+     /**
+     * Obtiene la categoría del producto.
+     * @return String "Teléfono Inteligente"
+     */
     
     @Override
     public String getTipoCategoria() {
@@ -36,35 +64,7 @@ public class Telefono extends Producto {
     }
 
     
-    public String getSegmento() {
-        if (this.getPrecio() >= 800 && capacidadRam >= 8 && almacenamientoGB >= 128) {
-            return "Gama Alta - Premium";
-        } else if (this.getPrecio() >= 400 && capacidadRam >= 6 && almacenamientoGB >= 64) {
-            return "Gama Media - Balanceado";
-        } else {
-            return "Gama Baja - Económico";
-        }
-    }
-    
-   
-    public boolean esCompatibile5G() {
-        return this.getPrecio() >= 500 && 
-               (soOperativo.equalsIgnoreCase("Android 12+") || 
-                soOperativo.equalsIgnoreCase("iOS 15+"));
-    }
-    
-  
-    public String getRelacionCalidadPrecio() {
-        double relacion = (capacidadRam + almacenamientoGB) / this.getPrecio();
-        
-        if (relacion > 0.5) {
-            return "Excelente - Alta relación calidad-precio";
-        } else if (relacion > 0.3) {
-            return "Buena - Buena relación calidad-precio";
-        } else {
-            return "Regular - Relación calidad-precio estándar";
-        }
-    }
+
     
    
     public String getEspecificacionesTecnicas() {
@@ -73,11 +73,7 @@ public class Telefono extends Producto {
             tamanio, capacidadRam, almacenamientoGB, soOperativo
         );
     }
-    
-   
-    public boolean esParaGaming() {
-        return capacidadRam >= 8 && almacenamientoGB >= 128;
-    }
+ 
     
     
     public boolean esEmpresarial() {
@@ -92,16 +88,11 @@ public class Telefono extends Producto {
             this.getMarca(),
             this.getModelo(),
             this.getNombre(),
-            getEspecificacionesTecnicas(),
-            getSegmento()
+            getEspecificacionesTecnicas()
         );
     }
 
-    public boolean estaDisponibleParaVenta() {
-        return this.getStock() > 0 && 
-               this.getPrecio() > 0 && 
-               this.getGarantia() >= 1.0; // Mínimo 1 año de garantía para teléfonos
-    }
+    //Getter y Setters
 
     public int getAlmacenamientoGB() {
         return almacenamientoGB;
@@ -135,7 +126,11 @@ public class Telefono extends Producto {
         this.tamanio = tamanio;
     }
 
-   
+      /**
+     * Representación en String del objeto Telefono.
+     * 
+     * @return String con toda la información del teléfono formateada
+     */
     @Override
     public String toString() {
         return String.format(
@@ -146,12 +141,7 @@ public class Telefono extends Producto {
             "Precio: $%.2f | IVA: $%.2f | Stock: %d | Garantía: %.1f años\n" +
             "Disponible: %s",
             getId(), getNombre(), getMarca() + " " + getModelo(),
-            getEspecificacionesTecnicas(),
-            getSegmento(), esCompatibile5G() ? "Sí" : "No", 
-            esParaGaming() ? "Sí" : "No", esEmpresarial() ? "Sí" : "No",
-            getRelacionCalidadPrecio(),
-            getPrecio(), calcularPercioIVa(), getStock(), getGarantia(),
-            estaDisponibleParaVenta() ? "Sí" : "No"
+            getEspecificacionesTecnicas()
         );
     }
     

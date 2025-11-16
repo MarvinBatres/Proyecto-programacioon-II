@@ -14,11 +14,23 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Clase utilizado para operaciones CRUD de teléfonos en Firebase Firestore
+ * Proporciona métodos para guardar, actualizar, eliminar y consultar teléfonos
+ */
 public class Crud_Telefono {
 
     CollectionReference reference;
     static Firestore db;
-
+    /**
+     * Guarda un nuevo teléfono en Firestore
+     * @param coleccion Nombre de la colección
+     * @param documento ID del documento
+     * @param datos_t Datos del teléfono para su guardado en Firebase
+     * @return retorna un true si se guardó correctamente o false en caso de error
+     */
+    
+    
     public static boolean guardarTelefono(String coleccion, String documento, Map<String, Object> datos_t) {
         Firestore db = Conexion_Base.getDb();
         try {
@@ -33,6 +45,14 @@ public class Crud_Telefono {
 
     }
 
+    
+     /**
+     * Actualiza un teléfono existente en Firestore
+     * @param coleccion Nombre de la colección
+     * @param documento ID del documento
+     * @param datos_t Datos del teléfono a actualizar
+     * @return retorna un true si se actualizó correctamente o false en caso de error
+     */
     public static boolean actualizarTelefono(String coleccion, String documento, Map<String, Object> datos_t) {
         Firestore db = Conexion_Base.getDb();
         try {
@@ -46,6 +66,13 @@ public class Crud_Telefono {
         return false;
 
     }
+    
+    /**
+     * Elimina un teléfono de Firestore
+     * @param coleccion Nombre de la colección
+     * @param documento ID del documento a eliminar
+     * @return retorna un true si se actualizó correctamente o false en caso de error
+     */
 
     public static boolean eliminarTelefono(String coleccion, String documento) {
         Firestore db = Conexion_Base.getDb();
@@ -60,6 +87,11 @@ public class Crud_Telefono {
         return false;
 
     }
+    
+     /**
+     * Carga todos los teléfonos en una tabla en formulario
+     * @param table JTable donde se mostrarán los datos 
+     */
 
     public static void cargaTablaTelefono(JTable table) {
         DefaultTableModel model = new DefaultTableModel();
@@ -103,7 +135,13 @@ public class Crud_Telefono {
         table.setModel(model);
 
     }
-
+    
+    /**
+     * Busca un teléfono por su ID en Firestore
+     * @param Id ID del teléfono a buscar
+     * @return retorna un Objeto Telefono si se encuentra, null si no existe o hay error
+     */
+    
     public static Telefono buscarTelefonoID(String Id) {
 
         try {

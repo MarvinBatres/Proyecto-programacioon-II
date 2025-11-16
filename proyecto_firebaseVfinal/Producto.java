@@ -1,5 +1,5 @@
 package com.mycompany.proyecto_firebase;
-//Clase padre de productos electronicos
+
 
 public abstract class Producto {
 
@@ -11,6 +11,17 @@ public abstract class Producto {
     protected String modelo;
     protected double garantia;
 
+    
+    /**
+     * La clase producto es la clase padre y abstracta de los productos: Computadora, Asistente telefono,  
+     * @param Id: Identificacion del producto
+     * @param nombre: Nombre del producto
+     * @param precio: Precio o valor del producto
+     * @param stock: Cantidad de unidades de un producto 
+     * @param marca: Marca del producto
+     * @param modelo: Tipo de modelo del producto
+     * @param garantia: Garantia de años que puede tener un producto
+     */
     public Producto(int Id, String nombre, Double precio, int stock, String marca, String modelo, double garantia) {
         this.Id = Id;
         this.nombre = nombre;
@@ -76,7 +87,12 @@ public abstract class Producto {
     public void setGarantia(double garantia) {
         this.garantia = garantia;
     }
-    //Metodos abstracto de herencias para las clases hijas
+    /**
+     *  Metodos abstracto de herencias para las clases hijas
+     * calcularPercioIVa(): Calcula el Iva del producto
+     * getTipoCategoria(): Tipo de categoria que pertenece el producto
+     * @return 
+     */
     public abstract double calcularPercioIVa();
     public abstract String getTipoCategoria();
 

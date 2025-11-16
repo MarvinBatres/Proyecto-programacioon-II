@@ -4,11 +4,21 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 
+/**
+ * La clase representa una herramienta electrónica como producto especializado.
+ * Extendido de la clase Producto con atributos específicos de herramientas electrónicas.
+ *
+ * @author Marvin Batres
+ */
+
 public class Registro_Telefono extends javax.swing.JFrame {
 
+   
     /**
-     * Creates new form Registro_Telefono
+     * Constructor que inicializa la interfaz y carga los datos de teléfonos.
+     * Centra la ventana en la pantalla y carga la tabla inicial.
      */
+    
     public Registro_Telefono() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -322,6 +332,13 @@ public class Registro_Telefono extends javax.swing.JFrame {
     private javax.swing.JTextField txtTamanioPantalla;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Valida que los campos obligatorios del formulario estén completos.
+     * Verifica que ID, Nombre, Precio, Stock y Marca no estén vacíos
+     * y que los campos numéricos tengan formato válido.
+     * 
+     * @return true si todos los campos son válidos, false en caso contrario
+     */
     
      private boolean validarCampos() {
         if (txtID.getText().trim().isEmpty()
@@ -349,9 +366,10 @@ public class Registro_Telefono extends javax.swing.JFrame {
 
     
     
-    
-    
-    
+    /**
+     * Crea un objeto Telefono con los datos ingresados en el formulario.
+     * @return Objeto Telefono con los datos del formulario
+     */   
     
     private Telefono crearCamposTelefono() {
         return new Telefono(
@@ -386,6 +404,14 @@ public class Registro_Telefono extends javax.swing.JFrame {
 
         return datos;
     }
+    
+    
+       /**
+     * Guarda un nuevo teléfono en la base de datos Firebase.
+     * Valida los campos, crea el objeto y lo almacena en la colección "Telefono".
+     * Actualiza la tabla del formulario después de guardar.
+     */
+    
 
     private void guardar() {
         if (!validarCampos()) {
@@ -408,7 +434,12 @@ public class Registro_Telefono extends javax.swing.JFrame {
         }
 
     }
-
+    
+    /**
+     * Actualiza los datos de un teléfono existente en Firebase.
+     * Utiliza el ID del teléfono para localizar y actualizar el registro.
+     * Actualiza la tabla después de modificar.
+     */
     private void actualizar() {
         if (!validarCampos()) {
             return;
@@ -430,6 +461,12 @@ public class Registro_Telefono extends javax.swing.JFrame {
         }
 
     }
+    
+    /**
+     * Elimina un teléfono de la base de datos Firebase.
+     * Utiliza el ID del teléfono para localizar y eliminar el registro.
+     * Actualiza la tabla después de eliminar.
+     */
 
     private void eliminar() {
         String idDoc = txtID.getText();
@@ -448,6 +485,12 @@ public class Registro_Telefono extends javax.swing.JFrame {
         }
 
     }
+    
+    /**
+     * Busca un teléfono por su ID en la base de datos.
+     * Muestra los resultados en el formulario y en la tabla.
+     * Si no encuentra el teléfono, muestra un mensaje de error.
+     */
 
     private void clearForm() {
 
@@ -464,6 +507,13 @@ public class Registro_Telefono extends javax.swing.JFrame {
         txtTamanioPantalla.setText("");
 
     }
+    
+    
+    /**
+     * Busca un teléfono por su ID en la base de datos.
+     * Muestra los resultados en el formulario y en la tabla.
+     * Si no encuentra el teléfono, muestra un mensaje de error.
+     */ 
 
     private void BusquedaId() {
         try {
@@ -492,6 +542,12 @@ public class Registro_Telefono extends javax.swing.JFrame {
 
         }
     }
+    
+    
+     /**
+     * Llena los campos del formulario con los datos de un objeto Telefono.
+     * @param telefono Objeto Telefono con los datos a mostrar
+     */
 
     private void llenarCamposTelefono(Telefono telefono) {
 

@@ -14,10 +14,25 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+
+/**
+ * Clase CRUD para operaciones con computadoras en Firebase Firestore
+ * Proporciona métodos para crear, leer, actualizar y eliminar registros de computadoras
+ */
+
 public class Crud_computadora {
 
     CollectionReference reference;
     static Firestore db;
+    
+    
+     /**
+     * Guarda una nueva computadora en Firestore
+     * @param coleccion Nombre de la colección
+     * @param documento ID del documento
+     * @param data Datos de la computadora
+     * @return retorna un true si se guardó correctamente la información o false en caso de un error
+     */
 
     public static boolean guardarComputadora(String coleccion, String documento, Map<String, Object> data) {
         Firestore db = Conexion_Base.getDb();
@@ -31,6 +46,15 @@ public class Crud_computadora {
         }
         return false;
     }
+    
+    /**
+     * Actualiza los datos de una computadora existente
+     * @param coleccion Nombre de la colección
+     * @param documento ID del documento
+     * @param data Datos para  actualizarlos
+     * @return retorna un true si se actualizo correctamente la información o false en caso de un error
+     */
+    
 
     public static boolean actualizarComputadora(String coleccion, String documento, Map<String, Object> data) {
         Firestore db = Conexion_Base.getDb();
@@ -45,6 +69,16 @@ public class Crud_computadora {
         }
         return false;
     }
+    
+    
+    
+    /**
+     * Elimina una computadora de Firestore
+     * @param coleccion Nombre de la colección
+     * @param documento ID del documento en eliminar
+     * @return retorna un true si se elimino correctamente la información o false en caso de un error
+     */
+    
 
     public static boolean eliminarComputadora(String coleccion, String documento) {
         Firestore db = Conexion_Base.getDb();
@@ -60,6 +94,11 @@ public class Crud_computadora {
         return false;
     }
 
+    /**
+     * Carga los datos de computadoras en una tabla Swing
+     * @param table JTable donde se mostrarán los datos
+     */
+    
     public static void cargarTablaComputadora(JTable table) {
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("procesador");
@@ -109,6 +148,12 @@ public class Crud_computadora {
         table.setModel(model);
 
     }
+    
+      /**
+     * Busca una computadora por su ID
+     * @param Id ID de la computadora a buscar
+     * @return retorna un Objeto Computadora si se encuentra el Id de la información, null si no existe
+     */
 
     public static Computadora buscarComputadoraID(String Id) {
 

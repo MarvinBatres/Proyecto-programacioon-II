@@ -14,11 +14,33 @@ import java.util.concurrent.ExecutionException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * 
+ *  Clase CRUD para gestionar operaciones de Herramientas Electrónicas en Firebase Firestore.
+ * Proporciona métodos para crear, leer, actualizar y eliminar registros de herramientas electrónicas.
+ * 
+ * @author Marvin Batres
+ */
+
+
+
 public class Crud_HerramientaElectronica {
 
     CollectionReference reference;
     static Firestore db;
 
+    
+    
+    /**
+     * Guarda una nueva herramienta electrónica en Firestore.
+     * 
+     * @param coleccion Nombre de la colección en Firestore
+     * @param documento ID del documento a guardar
+     * @param data_H Mapea con los datos de la herramienta electrónica
+     * @return retorna un true si se guardó correctamente, false en caso de error
+     */
+    
+    
     public static boolean guardarHer_Elect(String coleccion, String documento, Map<String, Object> data_H) {
         Firestore db = Conexion_Base.getDb();
         try {
@@ -32,6 +54,15 @@ public class Crud_HerramientaElectronica {
         return false;
     }
 
+    
+    /**
+     * Actualiza los datos de una herramienta electrónica existente.
+     * 
+     * @param coleccion Nombre de la colección en Firestore
+     * @param documento ID del documento a actualizar
+     * @param data_h Mapa con los nuevos datos a actualizar
+     * @return true si se actualizó correctamente, false en caso de error
+     */
     public static boolean actualizarHer_Elect(String coleccion, String documento, Map<String, Object> data_h) {
         Firestore db = Conexion_Base.getDb();
 
@@ -45,6 +76,15 @@ public class Crud_HerramientaElectronica {
         }
         return false;
     }
+    
+      /**
+     * Elimina una herramienta electrónica de Firestore.
+     * 
+     * @param coleccion Nombre de la colección en Firestore
+     * @param documento ID del documento a eliminar
+     * @return retorna un true si se eliminó correctamente, false en caso de error
+     */   
+    
 
     public static boolean eliminarHer_Elect(String coleccion, String documento) {
         Firestore db = Conexion_Base.getDb();
@@ -59,7 +99,13 @@ public class Crud_HerramientaElectronica {
         }
         return false;
     }
-
+    
+    /**
+     * Carga los datos de herramientas electrónicas en una JTable.
+     * @param table Tabla donde se mostrarán los datos
+     */
+    
+ 
     public static void cargarTablaHerramienta(JTable table) {
         DefaultTableModel model = new DefaultTableModel();
 
@@ -109,6 +155,12 @@ public class Crud_HerramientaElectronica {
         table.setModel(model);
     }
 
+    /**
+     * Busca una herramienta electrónica por su ID.
+     * @param Id ID de la herramienta a buscar
+     * @return Objeto HerramientaElectronica si se encuentra, null si no existe
+     */
+    
     public static HerramientaElectronica buscarHerramientaID(String Id) {
         try {
             Firestore db = Conexion_Base.getDb();
